@@ -4,6 +4,9 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lc.meq.dao.SysUsersDao" >
 
+	<!-- 使用Redis二级缓存 -->
+    <cache type="com.lc.meq.jedis.RedisCache"></cache>
+
 	<!-- 目的：为dao接口方法提供sql语句配置 -->
 	<select id="queryById" resultType="SysUsers" parameterType="String">
 		<!-- 具体的sql -->

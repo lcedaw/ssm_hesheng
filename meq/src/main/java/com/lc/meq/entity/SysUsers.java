@@ -1,8 +1,10 @@
 package com.lc.meq.entity;
 
+import java.io.Serializable;
+
 import com.alibaba.fastjson.JSON;
 
-public class SysUsers {
+public class SysUsers implements Serializable{
 	private String userUid;
 	private String userCode;
 	private String userName;
