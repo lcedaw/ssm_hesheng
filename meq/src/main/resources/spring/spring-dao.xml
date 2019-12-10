@@ -7,7 +7,7 @@
 	http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- 配置整合mybatis过程 -->
 	<!-- 1.配置数据库相关参数properties的属性：${url} -->
-	<context:property-placeholder location="classpath:jdbc.properties" />
+	<context:property-placeholder location="classpath:*.properties" />
 
 	<!-- 2.数据库连接池 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -42,7 +42,8 @@
 
 	<!-- redis -->
 	<!-- 连接池基本参数配置，类似数据库连接池 -->
-    <context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true"/>
+	<!-- 确保只有一个<context:property-placeholder>标签 -->
+    <!-- <context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true"/> -->
 
      <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
          <property name="maxTotal" value="${redis.maxActive}"/>
@@ -58,7 +59,7 @@
          <property name="poolConfig"  ref="poolConfig"></property> 
      </bean>
      
-      <bean id="redisCacheTransfer" class="cn.qlq.jedis.RedisCacheTransfer">
+      <bean id="redisCacheTransfer" class="com.lc.meq.jedis.RedisCacheTransfer">
          <property name="jedisConnectionFactory" ref="jedisConnectionFactory" />
      </bean>
      <!-- redis -->
