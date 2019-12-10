@@ -20,12 +20,13 @@ public class SysUsersController {
 	@Autowired
 	private SysUsersDao sysUsersDao;
 	
-	@RequestMapping(value = "login",method = RequestMethod.GET)
+	@RequestMapping(value = "login",method = RequestMethod.POST)
 	@ResponseBody
-	public String login(HttpServletRequest request) {
+	public String login(HttpServletRequest request, @RequestBody String sysUsers) {
 		String uid = "8f02bda8-e22d-4ea2-b1cb-0873d1be8b6e";
-		SysUsers sysUsers = sysUsersDao.queryById(uid);
-		return sysUsers.jsonString(sysUsers);
+		SysUsers users = sysUsersDao.queryById(uid);
+		return users.jsonString(users);
+//		return sysUsers.jsonString(sysUsers);
 	}
 	
 }
