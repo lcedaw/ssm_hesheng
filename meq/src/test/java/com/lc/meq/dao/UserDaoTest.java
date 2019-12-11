@@ -21,7 +21,7 @@ public class UserDaoTest extends BaseTest {
 		System.out.println(sysUsers.jsonString(sysUsers));
 	}
 	
-	//@Test
+	@Test
 	public void queryAll() throws Exception{
 		List<SysUsers> sysUsers = sysUsersDao.queryUsersAll();
 		JSONArray jsonArray = new JSONArray();
