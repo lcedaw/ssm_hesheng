@@ -1,5 +1,7 @@
 package com.lc.meq.dao;
 
+import java.util.List;
+
 import com.lc.meq.entity.SysUsers;
 
 public interface SysUsersDao {
@@ -12,4 +14,10 @@ public interface SysUsersDao {
 	 */
 	SysUsers queryById(String id);
 	
+	/**
+	 * 查询所有用户
+	 * 
+	 * @return
+	 */
+	List<SysUsers> queryUsersAll();
 }
