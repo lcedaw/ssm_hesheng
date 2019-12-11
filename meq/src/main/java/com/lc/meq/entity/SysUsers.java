@@ -6,6 +6,10 @@ import com.alibaba.fastjson.JSON;
 
 public class SysUsers implements Serializable
 {
+	/**
+	 * 考虑到兼容问题，为了让该类别Serializable向后兼容
+	 */
+	private static final long serialVersionUID = 4558649018717586673L;
 	private String userUid;
 	private String userCode;
 	private String userName;
