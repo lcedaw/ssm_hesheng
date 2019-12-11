@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 import com.alibaba.fastjson.JSON;
 
-public class SysUsers implements Serializable{
+public class SysUsers implements Serializable
+{
 	private String userUid;
 	private String userCode;
 	private String userName;
