@@ -9,11 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.lc.meq.constant.StatusCode;
 import com.lc.meq.dao.SysUsersDao;
+import com.lc.meq.entity.ResultBean;
 import com.lc.meq.entity.SysUsers;
 
 @Controller
@@ -28,6 +31,7 @@ public class SysUsersController {
 	public SysUsers login(HttpServletRequest request, @RequestBody String sysUsers) {
 		String uid = "8f02bda8-e22d-4ea2-b1cb-0873d1be8b6e";
 		SysUsers users = sysUsersDao.queryById(uid);
+		System.out.println(sysUsers);
 		return users;
 //		return users.jsonString(users);
 //		return sysUsers.jsonString(sysUsers);
@@ -43,6 +47,29 @@ public class SysUsersController {
 		}
 		return jsonArray.toJSONString();
 //		return sysUsers.jsonString(sysUsers);
+	}
+	
+	@RequestMapping(value = "testLogin", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultBean testLogin(@RequestParam(value = "userCode") String userCode, @RequestParam(value = "userName") String userName) {
+//	public ResultBean testLogin(@RequestBody String sysUsersJson) {
+		ResultBean resultBean = new ResultBean();
+//		JSONObject jsonObject = JSONObject.parseObject(sysUsersJson);
+		try {
+//			SysUsers sysUsers = sysUsersDao.getSysUsers(jsonObject.getString("userCode"), jsonObject.getString("userName"));
+			SysUsers sysUsers = sysUsersDao.getSysUsers(userCode, userName);
+			if(sysUsers == null) {
+				resultBean.setCode(StatusCode.HTTP_FAILURE);
+				resultBean.setMsg("登录失败，用户账号或密码错误！");
+			}else {
+				resultBean.setData(sysUsers);
+			}
+		} catch (Exception e) {
+			resultBean.setCode(StatusCode.HTTP_FAILURE);
+			resultBean.setMsg("登录失败，用户账号或密码错误！");
+		}
+		
+		return resultBean;
 	}
 	
 }

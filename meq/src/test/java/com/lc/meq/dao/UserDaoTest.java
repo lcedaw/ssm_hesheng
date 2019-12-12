@@ -18,10 +18,12 @@ public class UserDaoTest extends BaseTest {
 	public void testQuertById() throws Exception{
 		String uid = "a42b50ab-b436-4162-beda-ca73338eb3b2";
 		SysUsers sysUsers = sysUsersDao.queryById(uid);
+		
+//		SysUsers sysUsers = sysUsersDao.getSysUsers("55666", "1000");
 		System.out.println(sysUsers.jsonString(sysUsers));
 	}
 	
-	@Test
+	//@Test
 	public void queryAll() throws Exception{
 		List<SysUsers> sysUsers = sysUsersDao.queryUsersAll();
 		JSONArray jsonArray = new JSONArray();
