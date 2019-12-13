@@ -18,10 +18,11 @@ import com.lc.meq.constant.StatusCode;
 import com.lc.meq.dao.SysUsersDao;
 import com.lc.meq.entity.ResultBean;
 import com.lc.meq.entity.SysUsers;
+import com.lc.meq.service.SysUsersService;
 
 @Controller
 @RequestMapping("/sysUsers") // url:/模块/资源/{id}/细分 /seckill/list
-public class SysUsersController {
+public class SysUsersController extends BaseController {
 
 	@Autowired
 	private SysUsersDao sysUsersDao;
@@ -52,12 +53,10 @@ public class SysUsersController {
 	@RequestMapping(value = "testLogin", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultBean testLogin(@RequestParam(value = "userCode") String userCode, @RequestParam(value = "userName") String userName) {
-//	public ResultBean testLogin(@RequestBody String sysUsersJson) {
 		ResultBean resultBean = new ResultBean();
-//		JSONObject jsonObject = JSONObject.parseObject(sysUsersJson);
 		try {
-//			SysUsers sysUsers = sysUsersDao.getSysUsers(jsonObject.getString("userCode"), jsonObject.getString("userName"));
-			SysUsers sysUsers = sysUsersDao.getSysUsers(userCode, userName);
+//			SysUsers sysUsers = sysUsersDao.getSysUsers(userCode, userName);
+			SysUsers sysUsers = sysUsersService.getSysUsers(userCode, userName);
 			if(sysUsers == null) {
 				resultBean.setCode(StatusCode.HTTP_FAILURE);
 				resultBean.setMsg("登录失败，用户账号或密码错误！");
