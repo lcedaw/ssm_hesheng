@@ -55,7 +55,6 @@ public class SysUsersController extends BaseController {
 	public ResultBean testLogin(@RequestParam(value = "userCode") String userCode, @RequestParam(value = "userName") String userName) {
 		ResultBean resultBean = new ResultBean();
 		try {
-//			SysUsers sysUsers = sysUsersDao.getSysUsers(userCode, userName);
 			SysUsers sysUsers = sysUsersService.getSysUsers(userCode, userName);
 			if(sysUsers == null) {
 				resultBean.setCode(StatusCode.HTTP_FAILURE);
