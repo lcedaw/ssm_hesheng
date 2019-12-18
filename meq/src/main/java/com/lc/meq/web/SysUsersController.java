@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.lc.meq.constant.StatusCode;
+import com.lc.meq.authorization.manager.TokenManager;
+import com.lc.meq.authorization.model.TokenModel;
+import com.lc.meq.common.annotation.IgnoreSecurity;
+import com.lc.meq.common.constant.StatusCode;
 import com.lc.meq.dao.SysUsersDao;
 import com.lc.meq.entity.ResultBean;
 import com.lc.meq.entity.SysUsers;
@@ -26,6 +29,9 @@ public class SysUsersController extends BaseController {
 
 	@Autowired
 	private SysUsersDao sysUsersDao;
+	
+	@Autowired
+	private TokenManager tokenManager;
 	
 	@RequestMapping(value = "login",method = RequestMethod.POST)
 	@ResponseBody
@@ -52,6 +58,7 @@ public class SysUsersController extends BaseController {
 	
 	@RequestMapping(value = "testLogin", method = RequestMethod.POST)
 	@ResponseBody
+	@IgnoreSecurity
 	public ResultBean testLogin(@RequestParam(value = "userCode") String userCode, @RequestParam(value = "userName") String userName) {
 		ResultBean resultBean = new ResultBean();
 		try {
@@ -60,7 +67,14 @@ public class SysUsersController extends BaseController {
 				resultBean.setCode(StatusCode.HTTP_FAILURE);
 				resultBean.setMsg("登录失败，用户账号或密码错误！");
 			}else {
-				To
+				TokenModel tokenModel;
+				if(tokenManager.hasToken(sysUsers.getUserUid())) {
+					tokenManager.deleteToken(sysUsers.getUserUid());
+					tokenModel = tokenManager.createToken(sysUsers.getUserUid());    
+				}else{
+					//创建token
+					tokenModel = tokenManager.createToken(sysUsers.getUserUid());
+				}
 				
 				resultBean.setData(sysUsers);
 			}

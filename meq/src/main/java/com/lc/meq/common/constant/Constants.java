@@ -1,4 +1,4 @@
-package com.lc.meq.constant;
+package com.lc.meq.common.constant;
 
 public class Constants {
 	/**

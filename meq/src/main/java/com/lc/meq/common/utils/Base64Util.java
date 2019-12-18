@@ -1,4 +1,4 @@
-package com.lc.meq.utils;
+package com.lc.meq.common.utils;
 
 import java.io.UnsupportedEncodingException;
 
