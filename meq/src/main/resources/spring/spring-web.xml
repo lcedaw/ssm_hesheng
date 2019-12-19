@@ -39,21 +39,24 @@
     </mvc:annotation-driven>
 	
 	<!-- 配置文件上传 -->
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- 默认编码 -->
-        <property name="defaultEncoding" value="utf-8"/>
-        <!-- 文件大小最大值 -->
-        <property name="maxUploadSize" value="10485760000"/>
-        <!-- 内存中的最大值 -->
-        <property name="maxInMemorySize" value="40960"/>
-    </bean>
+	<bean id="multipartResolver"
+	      class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	    <!-- 默认编码 -->
+	    <property name="defaultEncoding" value="utf-8"/>
+	    <!-- 文件大小最大值 -->
+	    <property name="maxUploadSize" value="10485760000"/>
+	    <!-- 内存中的最大值 -->
+	    <property name="maxInMemorySize" value="40960"/>
+	</bean>
 	
-	<!-- 2.静态资源默认servlet配置
+	 <!-- 2.静态资源默认servlet配置
 		(1)加入对静态资源的处理：js,gif,png
 		(2)允许使用"/"做整体映射
 	 -->
 	 <mvc:default-servlet-handler/>
+	 
+	 <!-- 支持Controller的AOP代理 -->
+     <aop:aspectj-autoproxy/>
 	 
 	 <!-- 4.扫描web相关的bean -->
 	 <context:component-scan base-package="com.lc.meq.web" />
