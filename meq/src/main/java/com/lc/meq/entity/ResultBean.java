@@ -22,6 +22,10 @@ public class ResultBean {
      * 全局附加数据
      */
     private Object etxra = null;
+    /**
+     * 
+     */
+    private String token;
 
     public Object getData() {
         return data;
@@ -54,4 +58,13 @@ public class ResultBean {
     public void setEtxra(Object etxra) {
         this.etxra = etxra;
     }
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+    
 }

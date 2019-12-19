@@ -18,6 +18,7 @@ import com.lc.meq.authorization.manager.TokenManager;
 import com.lc.meq.authorization.model.TokenModel;
 import com.lc.meq.common.annotation.IgnoreSecurity;
 import com.lc.meq.common.constant.StatusCode;
+import com.lc.meq.common.utils.Base64Util;
 import com.lc.meq.dao.SysUsersDao;
 import com.lc.meq.entity.ResultBean;
 import com.lc.meq.entity.SysUsers;
@@ -29,11 +30,11 @@ public class SysUsersController extends BaseController {
 
 	@Autowired
 	private SysUsersDao sysUsersDao;
-	
+
 	@Autowired
 	private TokenManager tokenManager;
-	
-	@RequestMapping(value = "login",method = RequestMethod.POST)
+
+	@RequestMapping(value = "login", method = RequestMethod.POST)
 	@ResponseBody
 	public SysUsers login(HttpServletRequest request, @RequestBody String sysUsers) {
 		String uid = "8f02bda8-e22d-4ea2-b1cb-0873d1be8b6e";
@@ -43,8 +44,8 @@ public class SysUsersController extends BaseController {
 //		return users.jsonString(users);
 //		return sysUsers.jsonString(sysUsers);
 	}
-	
-	@RequestMapping(value = "queryAll",method = RequestMethod.POST)
+
+	@RequestMapping(value = "queryAll", method = RequestMethod.POST)
 	@ResponseBody
 	public String queryAll(HttpServletRequest request) {
 		List<SysUsers> sysUsers = sysUsersDao.queryUsersAll();
@@ -55,35 +56,50 @@ public class SysUsersController extends BaseController {
 		return jsonArray.toJSONString();
 //		return sysUsers.jsonString(sysUsers);
 	}
-	
+
 	@RequestMapping(value = "testLogin", method = RequestMethod.POST)
 	@ResponseBody
 	@IgnoreSecurity
-	public ResultBean testLogin(@RequestParam(value = "userCode") String userCode, @RequestParam(value = "userName") String userName) {
+	public ResultBean testLogin(@RequestParam(value = "userCode") String userCode,
+			@RequestParam(value = "userName") String userName) {
 		ResultBean resultBean = new ResultBean();
 		try {
 			SysUsers sysUsers = sysUsersService.getSysUsers(userCode, userName);
-			if(sysUsers == null) {
+			if (sysUsers == null) {
 				resultBean.setCode(StatusCode.HTTP_FAILURE);
 				resultBean.setMsg("登录失败，用户账号或密码错误！");
-			}else {
+			} else {
 				TokenModel tokenModel;
-				if(tokenManager.hasToken(sysUsers.getUserUid())) {
+				if (tokenManager.hasToken(sysUsers.getUserUid())) {
 					tokenManager.deleteToken(sysUsers.getUserUid());
-					tokenModel = tokenManager.createToken(sysUsers.getUserUid());    
-				}else{
-					//创建token
+					tokenModel = tokenManager.createToken(sysUsers.getUserUid());
+				} else {
+					// 创建token
 					tokenModel = tokenManager.createToken(sysUsers.getUserUid());
 				}
-				
+
 				resultBean.setData(sysUsers);
+				resultBean.setToken(Base64Util.encodeData(tokenModel.getToken()));
 			}
 		} catch (Exception e) {
 			resultBean.setCode(StatusCode.HTTP_FAILURE);
 			resultBean.setMsg("登录失败，用户账号或密码错误！");
 		}
-		
+
 		return resultBean;
 	}
-	
+
+	@RequestMapping(value = "/queryUserAll", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultBean queryUsersAll() {
+		ResultBean resultBean = new ResultBean();
+		try {
+			List<SysUsers> sysUsersList = sysUsersDao.queryUsersAll();
+			resultBean.setData(sysUsersList);
+		} catch (Exception e) {
+			resultBean.setCode(StatusCode.HTTP_FAILURE);
+			resultBean.setMsg("请求用户列表失败");
+		}
+		return resultBean;
+	}
 }

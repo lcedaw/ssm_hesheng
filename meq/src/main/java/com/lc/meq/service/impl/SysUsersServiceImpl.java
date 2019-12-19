@@ -1,5 +1,7 @@
 package com.lc.meq.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,12 @@ public class SysUsersServiceImpl implements SysUsersService {
 	@Autowired
 	SysUsersDao sysUsersDao;
 	
-	@Override
+	//@Override
 	public SysUsers getSysUsers(String userCode, String userName) {
 		return sysUsersDao.getSysUsers(userCode, userName);
+	}
+	
+	public List<SysUsers> queryUsersAll(){
+		return sysUsersDao.queryUsersAll();
 	}
 }
