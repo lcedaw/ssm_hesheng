@@ -1,7 +1,6 @@
 package com.lc.meq.common.aspect;
 
 import java.lang.reflect.Method;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,6 +27,7 @@ import com.lc.meq.common.utils.WebContextUtil;
  * @date 2019-12-18
  */
 @Component
+@Aspect
 public class SecurityAspect {
 
 	private static final Logger LOGGER = Logger.getLogger(SecurityAspect.class);

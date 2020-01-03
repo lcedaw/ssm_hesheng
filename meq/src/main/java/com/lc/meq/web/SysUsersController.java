@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.lc.meq.authorization.manager.TokenManager;
 import com.lc.meq.authorization.model.TokenModel;
 import com.lc.meq.common.annotation.IgnoreSecurity;
@@ -22,7 +21,6 @@ import com.lc.meq.common.utils.Base64Util;
 import com.lc.meq.dao.SysUsersDao;
 import com.lc.meq.entity.ResultBean;
 import com.lc.meq.entity.SysUsers;
-import com.lc.meq.service.SysUsersService;
 
 @Controller
 @RequestMapping("/sysUsers") // url:/模块/资源/{id}/细分 /seckill/list
