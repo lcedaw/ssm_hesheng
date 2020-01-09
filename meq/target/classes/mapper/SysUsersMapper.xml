@@ -21,7 +21,7 @@
 			user_uid = #{userId}::uuid
 	</select>
 	
-	<select id="getSysUsers" resultType="SysUsers" useCache="false">
+	<select id="getSysUsers" resultType="SysUsers" useCache="true">
 		SELECT
 			user_uid,
 			user_code,

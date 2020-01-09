@@ -62,7 +62,7 @@ public class RedisTokenManager implements TokenManager {
 	@Override
 	public TokenModel getToken(String authentication) {
 		if(StringUtils.isEmpty(authentication)) return null;
-		String[] param = authentication.split(",");
+		String[] param = authentication.split("_");
 		if(param.length != 3) return null;
 		//使用userId和源token简单拼接成的token，可以增加加密措施
 		String userUid = param[0];

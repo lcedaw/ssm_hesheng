@@ -20,8 +20,11 @@
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 	
-	<!-- 支持Controller的AOP代理 -->
+	<!-- 支持Controller的AOP代理,屏蔽了就可以不需要token -->
     <aop:aspectj-autoproxy/>
+	
+	<!-- 装配Swagger配置 -->
+	<bean class="com.lc.meq.common.config.SwaggerConfig"/>	
 	
 	<!-- 配置SpringMVC -->
 	<!-- 1.开启SpringMVC注解模式 -->

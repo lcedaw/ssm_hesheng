@@ -3,6 +3,7 @@ package com.lc.meq.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.lc.meq.service.SysRolesService;
 import com.lc.meq.service.SysUsersService;
 
 /**
@@ -16,4 +17,6 @@ public class BaseController {
 	@Autowired
 	SysUsersService sysUsersService;
 	
+	@Autowired
+	SysRolesService sysRolesService;
 }

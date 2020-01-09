@@ -15,14 +15,14 @@ public interface SysUsersDao {
 	 * @return
 	 */
 	SysUsers queryById(String id);
-	
+
 	/**
 	 * 查询所有用户
 	 * 
 	 * @return
 	 */
 	List<SysUsers> queryUsersAll();
-	
+
 	/**
 	 * 通过账号和名称查询用户
 	 * 
@@ -30,5 +30,5 @@ public interface SysUsersDao {
 	 * @param userName
 	 * @return
 	 */
-	SysUsers getSysUsers(@Param("userCode") String userCode ,@Param("userName") String userName);
+	SysUsers getSysUsers(@Param("userCode") String userCode, @Param("userName") String userName);
 }

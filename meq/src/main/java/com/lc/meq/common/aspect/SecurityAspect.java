@@ -1,6 +1,7 @@
 package com.lc.meq.common.aspect;
 
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,16 +47,16 @@ public class SecurityAspect {
         // *******************************放行swagger相关的请求url，开发阶段打开，生产环境注释掉*******************************
 
         HttpServletRequest request = WebContextUtil.getRequest();
-//        URL requestUrl = new URL(request.getRequestURL().toString());
-//        if (requestUrl.getPath().contains("configuration")) {
-//            return pjp.proceed();
-//        }
-//        if (requestUrl.getPath().contains("swagger")) {
-//            return pjp.proceed();
-//        }
-//        if (requestUrl.getPath().contains("api")) {
-//            return pjp.proceed();
-//        }
+        URL requestUrl = new URL(request.getRequestURL().toString());
+        if (requestUrl.getPath().contains("configuration")) {
+            return pjp.proceed();
+        }
+        if (requestUrl.getPath().contains("swagger")) {
+            return pjp.proceed();
+        }
+        if (requestUrl.getPath().contains("api")) {
+            return pjp.proceed();
+        }
         // ************************************************************************************************************
 
         // 若目标方法忽略了安全性检查,则直接调用目标方法

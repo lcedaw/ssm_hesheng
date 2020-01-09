@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lc.meq.dao.SysRolesDao" >
+
+	<cache type="com.lc.meq.jedis.RedisCache"></cache>
+	
+	<select id="queryById" resultType="SysRoles" useCache="false">
+		SELECT 
+			role_uid,
+			role_name,
+			remark,
+			is_deactive,
+			creator,
+			created_date
+		FROM
+			sys_roles
+		WHERE 
+			role_uid = #{roleUid}::uuid	
+	</select>
+</mapper>
