@@ -13,4 +13,10 @@ public interface SysRolesService {
 	 * @return
 	 */
 	SysRoles queryById(String roleUid);
+	
+	/**
+	 * 用过ID更新角色
+	 * @param sysRoles
+	 */
+	void updateById(SysRoles sysRoles);
 }

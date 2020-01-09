@@ -37,7 +37,12 @@ public class SysRolesController extends BaseController {
 	@ResponseBody
 	public ResultBean updateById(@RequestBody String updateString) throws Exception{
 		ResultBean resultBean = new ResultBean();
-		SysRoles sysRoles = JSON.parseObject(updateString,SysRoles.class);
+		try {
+			SysRoles sysRoles = JSON.parseObject(updateString,SysRoles.class);
+			sysRolesService.updateById(sysRoles);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
 		return resultBean;
 	}
 }

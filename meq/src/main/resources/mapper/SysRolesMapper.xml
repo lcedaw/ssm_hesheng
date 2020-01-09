@@ -4,9 +4,9 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lc.meq.dao.SysRolesDao" >
 
-	<cache type="com.lc.meq.jedis.RedisCache"></cache>
+	<!-- <cache type="com.lc.meq.jedis.RedisCache"></cache> -->
 	
-	<select id="queryById" resultType="SysRoles" useCache="false">
+	<select id="queryById" resultType="SysRoles">
 		SELECT 
 			role_uid,
 			role_name,
@@ -19,4 +19,17 @@
 		WHERE 
 			role_uid = #{roleUid}::uuid	
 	</select>
+	
+	<update id="updateById" parameterType="SysRoles">
+		UPDATE 
+			sys_roles
+		SET 
+			role_name = #{roleName},
+			remark = #{remark},
+			is_deactive = #{deactive},
+			creator = #{creator}::uuid,
+			created_date = #{createdDate}
+		WHERE
+			role_uid = #{roleUid}::uuid
+	</update>
 </mapper>

@@ -15,5 +15,5 @@ public interface SysRolesDao {
 	 * 通过id更新角色
 	 * @param roleUid
 	 */
-	void updateSysRolesById(String roleUid);
+	void updateById(SysRoles sysRoles);
 }

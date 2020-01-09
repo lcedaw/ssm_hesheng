@@ -22,4 +22,9 @@ public class SysRolesServiceImpl implements SysRolesService{
 	public SysRoles queryById(String roleUid) {
 		return sysRolesDao.queryById(roleUid);
 	}
+
+	@Override
+	public void updateById(SysRoles sysRoles) {
+		sysRolesDao.updateById(sysRoles);
+	}
 }
