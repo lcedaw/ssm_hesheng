@@ -2,16 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans.xsd
-	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context.xsd
-	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc.xsd
-	http://www.springframework.org/schema/aop 
-	http://www.springframework.org/schema/aop/spring-aop.xsd">
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
 	<context:component-scan base-package="com.lc.*" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -25,7 +27,7 @@
 	
 	<!-- 装配Swagger配置 -->
 	<bean class="com.lc.meq.common.config.SwaggerConfig"/>	
-	
+
 	<!-- 配置SpringMVC -->
 	<!-- 1.开启SpringMVC注解模式 -->
 	<!-- 简化配置： 
@@ -74,4 +76,37 @@
 	 
 	 <!-- 4.扫描web相关的bean -->
 	 <!-- <context:component-scan base-package="com.lc.meq.web" /> -->
+	 
+	 <!-- 定时执行任务 -->
+	 <!-- 要执行的任务类 -->
+	 <!-- <bean id="testJob" class="com.lc.meq.websocket.TestJob"></bean> -->
+	 
+	 <!-- 将需要执行的定时任务注入job中 -->
+	 <!-- <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="testJob" />
+		任务类中需要执行的方法
+	 	<property name="targetMethod" value="task"></property>
+	 	上一次未执行完成的，要等待有再执行。
+	 	<property name="concurrent" value="false" />
+	 </bean> -->
+	 
+	 <!-- 基本的定时器，会绑定具体的任务。 -->
+    <!-- <bean id="trigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail"/>
+        <property name="startDelay" value="3000"/>
+        <property name="repeatInterval" value="1000"/>
+    </bean>
+
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="trigger"/>
+            </list>
+        </property>
+    </bean> -->
+    
+    <task:executor id="excutor" pool-size="5"/>
+    <task:scheduler id="scheduler" pool-size="10"/>
+    <task:annotation-driven executor="excutor" scheduler="scheduler"/>
+
 </beans>
