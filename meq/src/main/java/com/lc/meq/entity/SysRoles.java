@@ -44,14 +44,6 @@ public class SysRoles{
 		return creator;
 	}
 
-	public void setCreator(String creator) {
-		this.creator = creator;
-	}
-
-	public Date getCreateDate() {
-		return createdDate;
-	}
-
 	public void setCreateDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
@@ -62,6 +54,14 @@ public class SysRoles{
 
 	public void setDeactive(boolean deactive) {
 		this.deactive = deactive;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 }

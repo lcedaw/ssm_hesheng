@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.lc.meq.dao.SysRolesDao;
 import com.lc.meq.entity.SysRoles;
+import com.lc.meq.pojo.vo.SysRolesVo;
 import com.lc.meq.service.SysRolesService;
 
 /**
@@ -19,7 +20,7 @@ public class SysRolesServiceImpl implements SysRolesService{
 	@Autowired
 	SysRolesDao sysRolesDao;
 	
-	public SysRoles queryById(String roleUid) {
+	public SysRolesVo queryById(String roleUid) {
 		return sysRolesDao.queryById(roleUid);
 	}
 

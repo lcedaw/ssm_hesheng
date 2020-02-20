@@ -6,7 +6,37 @@
 
 	<!-- <cache type="com.lc.meq.jedis.RedisCache"></cache> -->
 	
-	<select id="queryById" resultType="SysRoles">
+	<!-- <resultMap type="com.lc.meq.pojo.vo.SysRolesVo" id="sysRolesMap">
+		<id property="roleUid" column="role_uid"/>
+		<id property="roleName" column="role_name"/>
+		<id property="remark" column="remark"/>
+		<id property="deactive" column="is_deactive"/>
+		<id property="creator" column="creator" />
+		<id property="createdDate" column="created_date"/>
+		<association property="sysUsers" javaType="SysUsers">
+			<id property="userUid" column="user_uid"/>
+			<result property="userName" column="user_name"/> 
+		</association>
+	</resultMap> -->
+	
+	<select id="queryById" resultType="com.lc.meq.pojo.vo.SysRolesVo">
+		SELECT 
+			r.role_uid,
+			r.role_name,
+			r.remark,
+			r.is_deactive,
+			r.creator,
+			r.created_date,
+			u.user_name
+		FROM
+			sys_roles r
+		LEFT JOIN 
+			sys_users u ON r.creator = u.user_uid	
+		WHERE 
+			r.role_uid = #{roleUid}::uuid	
+	</select>
+	
+	<!-- <select id="queryById" resultType="SysRoles">
 		SELECT 
 			role_uid,
 			role_name,
@@ -18,7 +48,7 @@
 			sys_roles
 		WHERE 
 			role_uid = #{roleUid}::uuid	
-	</select>
+	</select> -->
 	
 	<update id="updateById" parameterType="SysRoles">
 		UPDATE 

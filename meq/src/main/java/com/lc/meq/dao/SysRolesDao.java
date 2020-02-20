@@ -1,6 +1,7 @@
 package com.lc.meq.dao;
 
 import com.lc.meq.entity.SysRoles;
+import com.lc.meq.pojo.vo.SysRolesVo;
 
 public interface SysRolesDao {
 
@@ -9,7 +10,7 @@ public interface SysRolesDao {
 	 * @param roleUid
 	 * @return
 	 */
-	SysRoles queryById(String roleUid);
+	SysRolesVo queryById(String roleUid);
 	
 	/**
 	 * 通过id更新角色

@@ -3,6 +3,7 @@ package com.lc.meq.service;
 import org.springframework.stereotype.Service;
 
 import com.lc.meq.entity.SysRoles;
+import com.lc.meq.pojo.vo.SysRolesVo;
 
 @Service
 public interface SysRolesService {
@@ -12,7 +13,7 @@ public interface SysRolesService {
 	 * @param roleUid
 	 * @return
 	 */
-	SysRoles queryById(String roleUid);
+	SysRolesVo queryById(String roleUid);
 	
 	/**
 	 * 用过ID更新角色
