@@ -11,7 +11,7 @@
 
 	<!-- 配置下面jar包的版本号 -->
 	<properties>
-		<spring.version>4.3.7.RELEASE</spring.version>
+		<spring.version>5.3.18</spring.version>
 	</properties>
 
 	<dependencies>
